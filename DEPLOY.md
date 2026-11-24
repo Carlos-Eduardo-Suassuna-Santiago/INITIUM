@@ -158,13 +158,15 @@ sudo nano /etc/caddy/Caddyfile
 Substitua todo o conteúdo por:
 ```caddyfile
 seu-dominio.com {
-    # Roteamento do Frontend
-    reverse_proxy localhost:8080
-}
+    # Comunicação WebSocket segura (WSS) sob o mesmo domínio e SSL
+    handle /ws* {
+        reverse_proxy localhost:8787
+    }
 
-# Porta dedicada para o WebSocket seguro (WSS) com o mesmo certificado SSL
-seu-dominio.com:8787 {
-    reverse_proxy localhost:8788
+    # Roteamento do Frontend React
+    handle {
+        reverse_proxy localhost:8080
+    }
 }
 ```
 

@@ -18,11 +18,13 @@ export type RealtimeClient = {
 function realtimeUrl() {
   const configured = import.meta.env.VITE_REALTIME_URL as string | undefined;
   if (configured) return configured;
-  const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+  if (window.location.protocol === "https:") {
+    return `wss://${window.location.host}/ws`;
+  }
   const hostname = window.location.hostname === "localhost"
     ? "127.0.0.1"
     : window.location.hostname;
-  return `${protocol}//${hostname}:8787`;
+  return `ws://${hostname}:8787`;
 }
 
 export function connectRealtime(onMessage: (message: RealtimeMessage) => void): RealtimeClient {

@@ -148,8 +148,8 @@ export function AdminPanel({
     realtime.current?.send({
       type: "LAB_COMMAND",
       payload: estado.status === "em_andamento"
-        ? { action: "start", durationSeconds: estado.durationSeconds, adminOperator: estado.adminOperator }
-        : { action: "reset" },
+        ? { action: "start", durationSeconds: estado.durationSeconds, adminOperator: "ADMIN" }
+        : { action: "reset", adminOperator: "ADMIN" },
     });
     try {
       localStorage.setItem(LAB_KEY, JSON.stringify(estado));

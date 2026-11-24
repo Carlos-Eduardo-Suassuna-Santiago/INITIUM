@@ -75,7 +75,8 @@ server.on("connection", (socket) => {
           return;
         }
         // Authorization check
-        if (command.adminOperator !== "ADMIN") {
+        const operator = String(command.adminOperator || "").trim().toUpperCase();
+        if (operator !== "ADMIN") {
           console.error(`Unauthorized LAB_COMMAND from ${command.adminOperator}`);
           return;
         }
