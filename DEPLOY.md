@@ -7,8 +7,8 @@ Este guia orienta o deploy completo da plataforma **INITIUM** (Frontend React/Vi
 ## 🏗️ Arquitetura de Implantação
 
 O sistema é executado em contêineres Docker leves:
-- **Frontend**: Aplicação React 19 compilada e servida por um servidor estático **Nginx Alpine** (porta `8080` ou `80`).
-- **Backend**: Servidor **Node.js 22 Alpine** com WebSocket Server puro (`ws`) gerenciando estados de laboratório, presenças e pontuações em tempo real (porta `8787`).
+- **Frontend**: Aplicação React 19 compilada e servida por um servidor estático **Nginx Alpine** (porta interna `8080`).
+- **Backend**: Servidor **Node.js 22 Alpine** com WebSocket Server puro (`ws`) gerenciando estados em tempo real (porta interna `8788`, exposta publicamente via proxy reverso SSL na porta `8787`).
 
 ---
 
@@ -162,9 +162,9 @@ seu-dominio.com {
     reverse_proxy localhost:8080
 }
 
-# Subdomínio ou porta dedicada para o WebSocket seguro
-realtime.seu-dominio.com {
-    reverse_proxy localhost:8787
+# Porta dedicada para o WebSocket seguro (WSS) com o mesmo certificado SSL
+seu-dominio.com:8787 {
+    reverse_proxy localhost:8788
 }
 ```
 
