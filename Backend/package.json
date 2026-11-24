@@ -1,0 +1,13 @@
+{
+  "name": "initium-backend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node realtime.mjs",
+    "realtime": "node realtime.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.22.1"
+  }
+}

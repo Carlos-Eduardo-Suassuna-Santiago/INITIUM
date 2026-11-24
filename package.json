@@ -1,0 +1,13 @@
+{
+  "name": "react-vite-tailwind",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm --prefix Frontend run dev",
+    "build": "npm --prefix Frontend run build",
+    "preview": "npm --prefix Frontend run preview",
+    "realtime": "npm --prefix Backend start",
+    "install:all": "npm --prefix Frontend install && npm --prefix Backend install"
+  }
+}

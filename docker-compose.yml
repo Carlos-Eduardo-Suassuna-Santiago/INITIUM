@@ -1,0 +1,19 @@
+services:
+  realtime:
+    build:
+      context: ./Backend
+    environment:
+      REALTIME_HOST: 0.0.0.0
+      REALTIME_PORT: 8787
+    ports:
+      - "8787:8787"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./Frontend
+    depends_on:
+      - realtime
+    ports:
+      - "8080:80"
+    restart: unless-stopped
